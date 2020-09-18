@@ -1,0 +1,31 @@
+<div class="row" *ngIf="products">
+    <div *ngFor="let p of products" class="col-md-5 card m-1">
+        <h5 class="card-header text-center">{{p.name}}</h5>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><img height="100" src="{{ this.catService.host+'/photoProduct/'+p.id}}" alt="{{ p.name }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ p.currentPrice|number:'0.2' }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button (click)="onEditPhoto(p)" class="mb-1">
+                                <span>edit</span>
+                            </button>
+                            <div *ngIf="editPhoto && currentProduct.id==p.id">
+                                <input type="file" (change)="onSelectedFile($event)">
+                                <button class="btn btn-success m-1" (click)="uploadPhoto()">Upload</button> 
+                                {{ progress }}
+
+                            </div>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
